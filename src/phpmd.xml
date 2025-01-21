@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<ruleset>
+    <description>
+        Custom PHPMD ruleset for Laravel projects
+    </description>
+
+    <!-- Include standard rules -->
+    <rule ref="rulesets/cleancode.xml">
+        <exclude name="StaticAccess" />
+    </rule>
+    <rule ref="rulesets/design.xml" >
+        <exclude name="CouplingBetweenObjects" />
+    </rule>
+
+    <rule ref="rulesets/controversial.xml" />
+    <rule ref="rulesets/unusedcode.xml" />
+
+    <!-- Include codesize ruleset with exclusions -->
+    <rule ref="rulesets/codesize.xml">
+        <exclude name="CouplingBetweenObjects" />
+        <exclude name="ExcessiveClassComplexity" />
+        <exclude name="TooManyPublicMethods" />
+    </rule>
+
+    <!-- Include naming ruleset with exclusions -->
+    <rule ref="rulesets/naming.xml">
+        <exclude name="ShortVariable" />
+        <exclude name="ShortMethodName" />
+    </rule>
+
+
+    <!-- Global exclusions -->
+    <exclude-pattern>*/database/migrations/*</exclude-pattern>
+    <exclude-pattern>*/database/seeds/*</exclude-pattern>
+    <exclude-pattern>*/database/factories/*</exclude-pattern>
+    <exclude-pattern>*/resources/lang/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/storage/*</exclude-pattern>
+    <exclude-pattern>*/public/*</exclude-pattern>
+    <exclude-pattern>*/*.blade.php</exclude-pattern>
+    <exclude-pattern>*/autoload.php</exclude-pattern>
+    <exclude-pattern>*/app/Providers/*</exclude-pattern>
+    <exclude-pattern>*/AdminPanelProvider.php</exclude-pattern>
+</ruleset>

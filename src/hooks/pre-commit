@@ -1,0 +1,30 @@
+#!/bin/sh
+# Run Laravel Pint to fix code style issues 
+./vendor/bin/pint --dirty 
+
+if [ $? -ne 0 ]; then
+  echo "Laravel Pint fixed some code style issues. Adding fixed files..." git add .
+fi
+
+# Static code analyze
+./vendor/bin/phpstan analyse --configuration=./phpstan.neon --memory-limit=1G --level=max
+if [ $? -ne 0 ]; then
+    echo "Larastan detected issues. Commit aborted."
+    exit 1
+fi
+
+./vendor/bin/phpmd app text ./phpmd.xml --strict
+
+if [ $? -ne 0 ]; then
+    echo "PHPMD detected issues. Commit aborted."
+    exit 1
+fi
+
+# Run Laravel tests
+#php artisan test
+#
+## Check if tests passed
+#if [ $? -ne 0 ]; then
+#    echo "Tests failed. Commit aborted."
+#    exit 1
+#fi
